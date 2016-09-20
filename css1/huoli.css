@@ -1,0 +1,206 @@
+*{
+	margin:0;
+	padding:0;
+}
+body,html{
+	width: 100%;
+	height: 100%;
+	
+}
+body{
+	background-image: url(../img2/bg.png); 
+	background-repeat: no-repeat;
+}
+.zhuti{
+	width: 100%;
+	height: 100%;
+}
+.logo{
+	width: 1120px;
+	padding-top:120px; 
+	margin: 0 auto;
+	display: black;
+	position: relative;
+}
+li{
+	list-style: none;
+}
+/*图片区内容*/
+.content{
+	width: 920px;
+	margin: 0 auto;
+	padding-top: 10px;
+	padding-left:15px;
+}
+ul{
+	display: inline-block;
+}
+.left-content{
+	display: inline-block;
+	width:50%;
+}
+.right-content{
+	display: inline-block;
+	width: 46%;
+}
+.ul1{
+	padding-right:15px;
+}
+/*底部*/
+.footer{
+	width:500px; 
+	margin: 0 auto;
+	padding-top:110px;
+}
+/*响应式布局*/
+@media screen and (min-width:1400px){
+	body{
+		background-size:100% 100%;
+	}
+}
+@media screen and (max-width: 890px) and (min-width:400px ){
+
+	body{
+		background-size:100% 100%;
+	}
+	/*图片区*/
+	.content{
+		width:80%;
+		height:80%; 	
+	}
+	/*定义区*/
+	li{
+		height: 33%;
+	}
+	#make{
+		width: 100%;
+		height: 100%;
+	}
+	/*左边区*/
+	.left-content{
+		width:100%; 
+		height: 48%;
+		padding-top:4%;
+	}.ul1{
+		width: 55%;
+		height: 100%;
+		padding-right: 0px;
+	}
+	.ul2{
+		width: 40%;
+		height:100%;
+	}
+	
+	/*右边区*/
+	.right-content{
+		width:100%;
+		height: 48%;
+	}
+	
+	.ul3{
+		width: 40%;
+		height: 100%;
+	}
+	.ul4{
+		width:55%;
+		height: 100%;
+	}
+	/*logo区*/
+	.logo{
+		height:6%;
+		width:80%;
+		display: black;
+		padding-top: 5%;
+		/*border:1px solid black;*/
+	}
+	#one{
+		width: 20%;
+		height:50%;
+		display: block;
+	}
+	#two{
+		width: 40%;
+		height: 50%;
+		display: block;
+	}
+	/*底部区*/
+	.footer{
+		width:80%;
+		padding-top: 3%;
+		height:2%;
+	}
+	.footer img{
+		width: 100%;
+	}
+}
+/*动画区*/
+#make:hover{
+	animation: move 0.5s  linear;
+	position: relative;
+}
+@keyframes move{
+	0%{left:0px;top:0px;}
+	25%{left: 0px;
+		top: -20px;}
+	50%{left:0;
+		top: 0px;}
+	75%{left:0;
+		top: -10px;}
+	100%{
+		left: 0px;
+		top:0px;}
+	}
+.dh2{
+	animation: move1 0.4s  ease-out;
+	/*position: relative;*/
+	}
+@keyframes move1{
+	0%{transform:scale(1)}
+	30%{transform:scale(0.9)}
+	70%{transform:scale(1.1)}
+	100%{transform:scale(1)}
+	}
+.dh3{
+	animation: move2 0.5s  linear;
+}
+@keyframes move2{
+	0%{transform: translateX(0);}
+	20%{transform: translateX(-20px);}
+	40%{transform: translateX(20px);}
+	60%{transform: translateX(-10px);}
+	80%{transform: translateX(10px);}
+	100%{transform: translateX(0);}
+}
+.ul4 li:nth-child(1){
+	position: relative;
+	top: 0;
+	left: 0;
+}
+.ul4 li:nth-child(2){
+	position: relative;
+	top: 0;
+	left: 0;
+}
+.gun{
+	width: 200px;
+	height: 14px;
+	font-size: 14px;
+	color: white;
+	position: absolute;
+	top:70%;
+	left: 20%;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.p1{
+	animation: gundong 6s linear infinite;
+}
+@keyframes gundong{
+	0%{transform: translateY(0);}
+	16%{transform: translateY(-14px);}
+	32%{transform: translateY(-28px);}
+	48%{transform: translateY(-14px);}
+	64%{transform: translateY(0px);}
+	80%{transform: translateY(14);}
+	100%{transform: translateY(0px);}
+}
