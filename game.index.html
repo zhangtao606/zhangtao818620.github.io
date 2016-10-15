@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+			#box{
+				width: 400px;
+				height: 480px;
+				border-radius: 5%;
+				border: 10px solid gold;
+				margin: 20px auto 0;
+				position: relative;
+				top: 0;
+				left: 0;
+			}
+			#show{
+				width: 300px;
+				height: 270px;
+				border-radius:15%;
+				border: 10px solid salmon;
+				margin: 10px auto 0;
+				font-size: 200px;
+				text-align: center;
+			}
+			#list{
+				width: 350px;
+				height: 60px;
+				margin: 20px auto 0;
+				font-size: 40px;
+				cursor: pointer;
+			}
+			#list li{
+				width: 40px;
+				height: 40px;
+				margin-left: 18px;
+				border:5px solid gainsboro;
+				border-radius:10% ;
+				list-style-type:none ;
+				float: left;
+			}
+			#word{
+				width: 300px;
+				height: 100px;
+				margin: 5px auto 0;
+			}
+			#txt{
+				width: 200px;
+				height: 50px;
+				font-size: 20px;
+				margin: 100px auto;
+			}
+			#time{
+				width:150px;
+				height: 40px;
+/*				border: 1px solid black;*/
+				float: left;
+				margin-left: 10px;
+			}
+			#content{
+				width: 400px;
+				height: 40px;
+/*				border: 1px solid black;*/
+				margin: 5px auto 0;
+				font-size: 30px;
+			}
+			#score{
+				width:130px;
+				height: 40px;
+/*				border: 1px solid black;*/
+				float: left;
+				margin-left: 100px;
+			}
+			#key{
+				list-style-type: none;
+				width:350px ;
+				height: 40px;
+				margin:5px auto 0;
+				cursor: pointer;
+/*				border: 1px solid black;*/
+			}
+			#key li{
+				width: 100px;
+				height: 30px;
+				float: left;
+				margin-left: 5px;
+				border-radius:10% ;
+				border: 5px solid greenyellow;
+				text-align: center;
+				line-height: 28px;
+				font-size: 24px;
+				background: burlywood;
+			}
+			.five{
+				width: 380px;
+				height: 340px;
+				border-radius:10% ;
+				border: 10px solid gainsboro;
+				position: absolute;
+				top: 0;
+				left:0px;
+				background:ghostwhite ;
+				opacity:0;
+				text-align: center;
+				font-size: 40px;
+				line-height: 150px;
+			}
+			
+			.five1{
+				font-size: 120px;
+				margin: 0 auto 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="content">
+				<div id="time">倒计时:<span id="time1">60</span></div>
+				<div id="score">分数:<span id="score1">0</span></div>
+			</div>		
+			<div id="show">
+				<p id="word">戏</p>
+				<p id="txt">请根据上面字的颜色<br />在下面选择对应的字</p>
+			</div>
+			<ul id="list">
+				<li>生</li>
+				<li>旦</li>
+				<li>净</li>
+				<li>末</li>
+				<li>丑</li>
+			</ul>
+				<ul id="key">
+					<li>开始游戏</li>
+					<li>重新来过</li>
+					<li>退出游戏</li>
+				</ul>
+				<!--开始游戏时给你一个时间提醒-->
+			<div id="threesecond" class="five">
+				五秒后进入游戏
+				<div id="threesecond1" class="five1"></div>
+			</div>
+			<!--退出时展示你本次的最好成绩-->
+			<div class="five">
+				你本次的最好成绩是
+				<div class="five1" ></div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+//	获取元素
+	//	获取下端的文字
+	var List=document.getElementById('list');
+	var Listarr=List.getElementsByTagName('li');
+	//	对游戏的进行操作
+	var Key=document.getElementById('key');
+	//开始游戏
+	var Begin=Key.getElementsByTagName('li')[0];
+	//	再来一次
+	var Retry=Key.getElementsByTagName('li')[1];
+	//退出游戏
+	var Quit=Key.getElementsByTagName('li')[2];
+	//时间
+	var oTime1=document.getElementById('time1');
+	//分数
+	var oScore1=document.getElementById('score1');
+	//显示区的文字
+	var Word=document.getElementById('word');
+	//退出时页面的显示
+	var Five=document.getElementsByClassName('five')[1];
+	var Five1=document.getElementsByClassName('five1')[1];
+	var Timer=null;
+	var num=0;
+	var M=0;
+	var timer1=null;
+	var bol=true;
+	var scoreArr=[];	
+	var Maxnumber=0;
+//	三秒定时区元素获取
+	var Threesecond=document.getElementById('threesecond');
+
+	//时间倒计时部分
+	function fun1(){
+		var index1=60;
+	timer1=setInterval(function(){
+			oTime1.innerHTML=index1;
+			index1--;
+			if (index1<0) {
+				clearInterval(timer1)
+			}
+			M=index1;
+	},1000)
+	}
+	//显示区的文字颜色随机数组的函数
+//定义颜色的数组
+var colorArr=['red','green','blue','yellow','black'];
+//定义文字的数组
+var wordArr=['红','绿','蓝','黄','黑'];
+
+	//按钮控制区
+	//开始游戏
+	//判断一下时候为第一次点击
+		Begin.onclick=function(){
+			if (bol==true) {
+				bol=false;
+				Threesecond.style.opacity=0.9;
+				fun3();
+				setTimeout(function(){
+			//提示五秒后进入游戏
+				oScore1.innerHTML=0;
+				fun1();
+				fun2();	
+				},6000)}
+			else{return;}
+	}
+	//再玩一次
+	Retry.onclick=function(){
+		Threesecond.style.opacity=0.9;
+		fun3();
+		num=0;
+		setTimeout(function(){
+			//提示三秒后进入游戏
+			oScore1.innerHTML=0;
+				clearInterval(timer1);
+				fun1();
+				fun2();	
+		},6000)	
+	}
+	//点击离开
+	Quit.onclick=function(){
+		fun4();
+		setTimeout(function(){
+			window.close();
+		},3000)	
+	}
+	//	主函数封装
+	function fun2(){
+	//定义一个空数组接受颜色
+	var 	Arr1=[];
+	//定义一个空数组接受汉子
+	var 	Arr2=[];
+	//	生成新的数字数组1
+	while(Arr1.length<5){
+		var i=Random();
+		if (Arr1.indexOf(i)==-1) {	
+		Arr1.push(i);
+		}		
+	}
+	//生成新的数字数组2
+	while(Arr2.length<5){
+		var j=Random();
+		if (Arr2.indexOf(j)==-1) {		
+		Arr2.push(j);	
+		}		
+	}
+	//为显示区的汉字随机颜色和字
+	var a=Random();
+	var b=Random();
+	Word.style.color=colorArr[Arr1[a]];
+	Word.innerHTML=wordArr[Arr2[b]];
+	//给list的点击块设计汉子和颜色
+		for (var i=0;i<Listarr.length;i++) {
+			Listarr[i].style.color=colorArr[Arr1[i]];
+			Listarr[i].innerHTML=wordArr[Arr2[i]];
+		}
+		//为所有的下列字体添加点击事件
+		for (var i=0;i<Listarr.length;i++) {
+			Listarr[i].index=i;
+			Listarr[i].onclick=function(){
+				index=this.index;
+				//判断你的点击是否正确
+				if (Arr2[index]==Arr1[a]) {
+//					添加一个判断倒计时数字是否为0;
+//是的话,禁止点击事件,函数结束
+					if (M==-1) {
+						scoreArr.push(num);
+						if (num>Maxnumber) {
+							alert('恭喜你创造新纪录了')
+						};
+						funMax();
+						Maxnumber=scoreArr[0];
+						return;
+					}else{
+					 num++;
+					oScore1.innerHTML=num;
+					}
+					setTimeout(fun2,500)
+				}
+			}
+		}	
+	}
+	//随机数封装函数
+	function Random(){
+		random=Math.floor(Math.random()*5)
+		return random;
+	}
+//	5秒定时封装函数
+	function fun3(){
+		var index=6;
+		var threeTime=setInterval(function(){
+			index--;
+			threesecond1.innerHTML=index;
+			if (index==0) {
+				//判断一下是否成立成立的话就关闭本提醒,并且关闭本定时器
+				//清空文字
+				Threesecond.style.opacity=0;
+				clearInterval(threeTime);
+				threesecond1.innerHTML='';	
+			}
+		},1000)
+	}
+	//分数最大值的获取函数
+	function funMax(){
+				//判断分数的最大值
+		for (var i=0;i<scoreArr.length;i++) {
+			for (var j=0;j<scoreArr.length;j++) {
+				if (scoreArr[j]<scoreArr[j+1]) {
+					Max=scoreArr[j]
+					scoreArr[j]=scoreArr[j+1];
+					scoreArr[j+1]=Max} }}
+		}
+//	退出时报告成绩的函数封装
+	function fun4(){
+		Five.style.opacity=0.9;
+		Five1.innerHTML=Maxnumber;
+	}
+</script>
