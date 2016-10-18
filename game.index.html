@@ -279,6 +279,15 @@ var wordArr=['红','绿','蓝','黄','黑'];
 //是的话,禁止点击事件,函数结束
 					if (M==-1) {
 						scoreArr.push(num);
+						if (num<=60) {
+								alert('小学生水平,请加强练习');
+							}else if(num<=80){
+								alert('中学生水平,请多多练习');
+							}else if(num<=100){
+								alert('大学生水平,请继续保持');
+							}else{
+								alert('你是大神,崇拜你');
+							}
 						if (num>Maxnumber) {
 							alert('恭喜你创造新纪录了')
 						};
